@@ -1,41 +1,49 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import UseEffectAPI from './MyComponents/useEffectAPI';
-import axios, { Axios } from 'axios';
-import {myFunction} from "./functions.js";
+// import axios, { Axios } from 'axios';
+// import {myFunction} from "./functions.js";
 // import React, { Component } from 'react';
 
 function App() {
 
-  // $.ajax({
-  //   url: 'https://randomuser.me/api/',
-  //   dataType: 'json',
-  //   success: function(data) {
-  //     console.log(data);
-  //   }
-  // });
-
-  // const [data, setData] = useState([]);
-  // const getData = () => {
-  //   fetch("https://randomuser.me/api/")
-  //   .then((responce) => responce.json
-  //   ).then(data => setData(data))
-  //   console.log(data);
-  //   console.log("data");
-  // };
-
-  // const [data, setData] = useState([]);
-
-  // useEffect(()=>{
-  //   loadData();
-  // },[]);
-
-  // const loadData = async () => {
-  //   // fetch("https://randomuser.me/")
-  //   // .then(response => responce.json())
-  //   // .then(data => setData(data));
-  //   // console.log(data);
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
+  // function myFunction() {
+  //   document.getElementById("myDropdown").classList.toggle("show");
   // }
+
+  const myFunction = () => {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+
+  function myFunction2() {
+    document.getElementById("non-myDropdown").classList.toggle("show");
+  }
+
+  function myrate() {
+    debugger;
+    var hours = document.getElementById("hours").value;
+    if (hours != '') {
+      var rate = hours * 6;
+      document.getElementById("rate-output").innerHTML = "The rate is $" + rate;
+    }
+  }
+
+  // Close the dropdown menu if the user clicks outside of it
+  window.onClick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
 
   return (
     <div className="App">
@@ -48,7 +56,7 @@ function App() {
             <a href="#home">Home</a>
             <a href="#business">Business</a>
             <div className="dropdown">
-              <button onclick={{myFunction}} className="dropbtn">Functional Requirements</button>
+              <button onClick={myFunction} className="dropbtn">Functional Requirements</button>
               <div id="myDropdown" className="dropdown-content">
                 <a href="#">Input the number of hours</a>
                 <a href="#">Get the output</a>
@@ -76,7 +84,7 @@ function App() {
               </div>
             </div>
             <div className="dropdown">
-              <button onclick="myFunction2()" className="dropbtn">Non-Functional Requirements</button>
+              <button onClick={myFunction2} className="dropbtn">Non-Functional Requirements</button>
               <div id="non-myDropdown" className="dropdown-content">
                 <a href="#">Response Time</a>
                 <a href="#">Net processing time</a>
@@ -107,7 +115,7 @@ function App() {
                   </div>
 
                   {/* <!--  button--> */}
-                  <button type="button" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onclick="myrate()">Submit</button>
+                  <button type="button" className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={myrate}>Submit</button>
                   <div className="leading-7 mt-5 text-gray-600">
                     <p id="rate-output"></p>
                   </div>
@@ -117,7 +125,10 @@ function App() {
           </form>
         </div>
 
-        {/* <button onClick={getData}>get data</button> */}
+        {/* <button onClick={getUsers}>get data</button> */}
+        {/* <div>
+          <p>{data}</p>
+        </div> */}
 
         <UseEffectAPI title="Zain" />
 

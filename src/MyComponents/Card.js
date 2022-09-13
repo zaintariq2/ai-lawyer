@@ -4,7 +4,6 @@ import React from 'react'
 const Card = () => {
     return (
         <div>
-            {/* <button onClick={<UseEffectAPI/>}>get data</button> */}
             <div>
                 
             </div>

@@ -1,12 +1,10 @@
 import React from 'react'
-// import UseEffectAPI from './useEffectAPI';
+// import UseEffectAPI from './useEffectAPI'
 
-const Card = () => {
+const Card = (props) => {
     return (
         <div>
-            <div>
-                
-            </div>
+            
         </div>
     )
 }

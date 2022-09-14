@@ -127,7 +127,7 @@
 }
 
 .back-image{
-    background-image: url("/public/robot.jpg");
+    /* background-image: url("/public/robot.jpg"); */
     background-size: cover;
     background-position: center center;
     height: 600px;

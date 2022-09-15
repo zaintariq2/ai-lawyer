@@ -12,6 +12,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { useRef } from "react"
+import { useAuth } from '../Contexts/AuthContext'
+import { useState } from 'react'
+import { Alert } from 'react-bootstrap';
 
 function Copyright(props) {
   return (
@@ -29,13 +33,28 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const { signup } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    try {
+      setError("")
+      setLoading(true)
+      await signup(email, password)
+    } catch {
+      setError('Failed to create an account')
+    }
+    setLoading(false)
   };
 
   return (
@@ -51,11 +70,11 @@ export default function SignUp() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {error && <Alert variant="danger">{error} </Alert>}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -108,6 +127,7 @@ export default function SignUp() {
               </Grid>
             </Grid>
             <Button
+              disabled={loading}
               type="submit"
               fullWidth
               variant="contained"

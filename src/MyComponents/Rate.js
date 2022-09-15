@@ -12,7 +12,7 @@ const Rate = () => {
     return (
         <div className="back-image">
             <form>
-                <section className="text-gray-100 body-font">
+                <section className="text-gray-600 body-font">
                     <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
 
                         <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:m-auto w-full mt-10 md:mt-0">

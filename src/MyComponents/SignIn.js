@@ -8,10 +8,12 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useAuth } from '../Contexts/AuthContext';
+import { useState } from 'react';
+import { Alert } from 'react-bootstrap';
 
 function Copyright(props) {
   return (
@@ -29,13 +31,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+  const { signin } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    try {
+      setError("")
+      setLoading(true)
+      await signin(email, password)
+    } catch {
+      setError('Failed to Sign In')
+    }
+    setLoading(false)
+
   };
 
   return (
@@ -56,6 +75,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {error && <Alert variant="danger">{error} </Alert>}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -82,6 +102,7 @@ export default function SignIn() {
               label="Remember me"
             />
             <Button
+              disabled={loading}
               type="submit"
               fullWidth
               variant="contained"

@@ -10,6 +10,7 @@ import Requirements from './MyComponents/Requirements';
 import SignUp from './MyComponents/SignUp';
 import SignIn from './MyComponents/SignIn';
 import Contact from './MyComponents/Contact';
+import { AuthProvider } from './Contexts/AuthContext';
 // import { Switch } from '@mui/material';
 
 function App() {
@@ -29,24 +30,25 @@ function App() {
   }
 
   return (
+    <AuthProvider>
+      <div className="App">
 
-    <div className="App">
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
 
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
+          <Route exact path="/pricing" element={<PricingContent />} />
 
-        <Route exact path="/pricing" element={<PricingContent />} />
+          <Route exact path="/requirements" element={<Requirements />} />
 
-        <Route exact path="/requirements" element={<Requirements />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/signin" element={<SignIn />} />
+          <Route exact path="/contact" element={<Contact />} />
 
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/signin" element={<SignIn />} />
-        <Route exact path="/contact" element={<Contact />} />
-        
-      </Routes>
+        </Routes>
 
-    </div>
+      </div>
+    </AuthProvider>
   );
 }
 

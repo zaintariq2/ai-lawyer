@@ -4,10 +4,10 @@ on:
     branches:
       - main # or the name of your main branch
 jobs:
+  runs:
+    using: 'node16'
   build:
     name: Build
-    runs:
-      using: 'node16'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

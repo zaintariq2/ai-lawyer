@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     name: Build
+    runs:
+      using: 'node16'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
